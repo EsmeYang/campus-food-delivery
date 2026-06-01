@@ -1,7 +1,0 @@
-/Users/yyang/campus-food-delivery/src/main/java/com/campus/food/FoodApplication.java
-/Users/yyang/campus-food-delivery/src/main/java/com/campus/food/config/SecurityConfig.java
-/Users/yyang/campus-food-delivery/src/main/java/com/campus/food/controller/UserController.java
-/Users/yyang/campus-food-delivery/src/main/java/com/campus/food/dto/RegisterRequest.java
-/Users/yyang/campus-food-delivery/src/main/java/com/campus/food/model/User.java
-/Users/yyang/campus-food-delivery/src/main/java/com/campus/food/repository/UserRepository.java
-/Users/yyang/campus-food-delivery/src/main/java/com/campus/food/service/UserService.java
