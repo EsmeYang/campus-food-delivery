@@ -18,3 +18,8 @@ spring:
 jwt:
   secret: campus-food-delivery-secret-key-2024-very-long-string
   expiration: 86400000
+
+logging:
+  level:
+    com.campus.food: DEBUG
+    org.springframework.security: DEBUG
