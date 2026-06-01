@@ -1,6 +1,7 @@
 package com.campus.food.controller;
 
 import com.campus.food.dto.RegisterRequest;
+import com.campus.food.dto.LoginRequest;
 import com.campus.food.model.User;
 import com.campus.food.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,11 @@ public class UserController {
     public ResponseEntity<User> register(@RequestBody RegisterRequest request) {
         User user = userService.register(request);
         return ResponseEntity.ok(user);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+        String token = userService.login(request);
+        return ResponseEntity.ok(token);
     }
 }
