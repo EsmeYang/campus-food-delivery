@@ -35,6 +35,10 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/users/register", "/api/users/login").permitAll()
                 .requestMatchers("/api/dishes/**").permitAll()
+                .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/orders").authenticated()
+                .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/orders/**").authenticated()
+                .requestMatchers(org.springframework.http.HttpMethod.PATCH, "/api/orders/**").authenticated()
+                .requestMatchers(org.springframework.http.HttpMethod.PUT, "/api/orders/**").authenticated()
                 .anyRequest().authenticated()
             );
         return http.build();
