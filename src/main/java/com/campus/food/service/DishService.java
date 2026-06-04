@@ -1,11 +1,13 @@
 package com.campus.food.service;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-
+import java.util.concurrent.TimeUnit;
 import com.campus.food.model.Dish;
 import com.campus.food.repository.DishRepository;
 @Service
@@ -37,10 +39,21 @@ public class DishService {
     public List<Dish> getDishByMerchantId(Long merchantId) {
         return dishRepository.findByMerchantId(merchantId);
     }
+
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+
     public List<Dish> getAvailableDish() {
-        return dishRepository.findAll().stream()
+        if(redisTemplate.opsForValue().get("dishes:available") == null) {
+            List<Dish> dishes = dishRepository.findAll().stream()
                 .filter(Dish::getAvailable)
                 .collect(Collectors.toList());
+            redisTemplate.opsForValue().set("dishes:available", dishes, 10, TimeUnit.MINUTES);
+            return dishes;
+        } else {
+            return (List<Dish>) redisTemplate.opsForValue().get("dishes:available");
+        }
+        
     }
     
 }
