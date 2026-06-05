@@ -18,13 +18,7 @@ public class Order {
     @Column(nullable = false)
     private Long userId;
 
-    @Column(nullable = false)
-    private Long dishId;
-
-    @Column(nullable = false, length = 20)
-    private Integer quantity;
-
-    @Column(length = 100)
+    @Column(precision = 10, scale = 2)
     private BigDecimal totalPrice;
 
     @Column(nullable = false)
@@ -42,12 +36,6 @@ public class Order {
 
     public Long getUserId() { return userId; }
     public void setUserId(Long userId) { this.userId = userId; }
-
-    public Long getDishId() { return dishId; }
-    public void setDishId(Long dishId) { this.dishId = dishId; }
-
-    public Integer getQuantity() { return quantity; }
-    public void setQuantity(Integer quantity) { this.quantity = quantity; }
 
     public BigDecimal getTotalPrice() { return totalPrice; }
     public void setTotalPrice(BigDecimal totalPrice) { this.totalPrice = totalPrice; }

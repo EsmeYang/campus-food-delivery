@@ -1,7 +1,6 @@
 package com.campus.food.repository;
 
 import java.util.List;
-import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.campus.food.model.Dish;
 
