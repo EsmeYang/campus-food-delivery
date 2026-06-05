@@ -42,6 +42,18 @@ Three-layer architecture:
 | PATCH | /api/orders/{id}/status | Yes | Cancel an order |
 | PUT | /api/orders/{id}/status | Yes | Update order status |
 
+**Place Order Request Body:**
+```json
+{
+  "userId": 1,
+  "address": "123 University Ave",
+  "orderItems": [
+    {"dishId": 1, "quantity": 2},
+    {"dishId": 2, "quantity": 1}
+  ]
+}
+```
+
 ## How to Run Locally
 
 ### Prerequisites
