@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.campus.food.dto.PlaceOrderRequest;
 import com.campus.food.model.Order;
 import com.campus.food.service.OrderService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -21,7 +22,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
     @PostMapping
-    public ResponseEntity<Order> placeOrder(@RequestBody PlaceOrderRequest request) {
+    public ResponseEntity<Order> placeOrder(@Valid @RequestBody PlaceOrderRequest request) {
         Order order = orderService.placeOrder(request);
         return ResponseEntity.ok(order);
     }
