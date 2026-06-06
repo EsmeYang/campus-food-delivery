@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import com.campus.food.exception.ResourceNotFoundException;
 import com.campus.food.model.Dish;
 import com.campus.food.repository.DishRepository;
 @Service
@@ -19,7 +20,7 @@ public class DishService {
 
     public void updateDish(Dish dish) {
         Dish existingDish = dishRepository.findById(dish.getId())
-                .orElseThrow(() -> new RuntimeException("Dish not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Dish not found"));
         existingDish.setName(dish.getName());
         existingDish.setPrice(dish.getPrice());
         existingDish.setDescription(dish.getDescription());
@@ -31,7 +32,7 @@ public class DishService {
 
     public void deleteDish(Long dishId) {
         Dish existingDish = dishRepository.findById(dishId)
-                .orElseThrow(() -> new RuntimeException("Dish not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Dish not found"));
         dishRepository.delete(existingDish);
     }
     public List<Dish> getDishByMerchantId(Long merchantId) {

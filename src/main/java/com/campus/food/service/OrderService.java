@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.campus.food.dto.OrderItemRequest;
 import com.campus.food.dto.OrderResponse;
 import com.campus.food.dto.PlaceOrderRequest;
+import com.campus.food.exception.ResourceNotFoundException;
 import com.campus.food.model.Dish;
 import com.campus.food.model.Order;
 import com.campus.food.model.OrderItem;
@@ -37,7 +38,7 @@ public class OrderService {
         for (OrderItemRequest item : request.getOrderItems()) {
             // fetch dish, create OrderItem, add to totalPrice
             Dish dish = dishRepository.findById(item.getDishId())
-                    .orElseThrow(() -> new RuntimeException("Dish not found"));
+                    .orElseThrow(() -> new ResourceNotFoundException("Dish not found"));
             BigDecimal itemTotal = dish.getPrice().multiply(BigDecimal.valueOf(item.getQuantity()));
             totalPrice = totalPrice.add(itemTotal);
             OrderItem orderItem = new OrderItem();
@@ -54,7 +55,7 @@ public class OrderService {
 
     public void cancelOrder(Long orderId) {
         Order existingOrder = orderRepository.findById(orderId)
-                .orElseThrow(() -> new RuntimeException("Order not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
         existingOrder.setStatus(Order.OrderStatus.CANCELLED);
         orderRepository.save(existingOrder);
     }
@@ -79,7 +80,7 @@ public class OrderService {
     }
     public void updateOrderStatus(Long orderId, Order.OrderStatus status) {
         Order existingOrder = orderRepository.findById(orderId)
-                .orElseThrow(() -> new RuntimeException("Order not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
         existingOrder.setStatus(status);
         orderRepository.save(existingOrder);
     }
