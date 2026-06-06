@@ -1,6 +1,7 @@
 package com.campus.food.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +12,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.campus.food.dto.OrderResponse;
 import com.campus.food.dto.PlaceOrderRequest;
 import com.campus.food.model.Order;
 import com.campus.food.service.OrderService;
+
 import jakarta.validation.Valid;
 
 @RestController
@@ -39,8 +43,8 @@ public class OrderController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Order>> viewOrdersByUserId(@PathVariable Long userId) {
-        List<Order> orders = orderService.viewOrdersByUserId(userId);
+    public ResponseEntity<List<OrderResponse>> viewOrdersByUserId(@PathVariable Long userId) {
+        List<OrderResponse> orders = orderService.viewOrdersByUserId(userId);
         return ResponseEntity.ok(orders);
     }
 

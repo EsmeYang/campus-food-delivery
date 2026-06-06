@@ -1,10 +1,12 @@
 package com.campus.food.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.campus.food.dto.OrderItemRequest;
+import com.campus.food.dto.OrderResponse;
 import com.campus.food.dto.PlaceOrderRequest;
 import com.campus.food.model.Dish;
 import com.campus.food.model.Order;
@@ -56,8 +58,24 @@ public class OrderService {
         existingOrder.setStatus(Order.OrderStatus.CANCELLED);
         orderRepository.save(existingOrder);
     }
-    public List<Order> viewOrdersByUserId(Long userId) {
-        return orderRepository.findByUserId(userId);
+    public List<OrderResponse> viewOrdersByUserId(Long userId) {
+        List<Order> orders = orderRepository.findByUserId(userId);
+        List<OrderResponse> responses = new ArrayList<>();
+        // for each order, build an OrderResponse
+        // return the list of OrderResponse
+        for(Order order : orders) {
+            List<OrderItem> orderItems = orderItemRepository.findByOrderId(order.getId());
+            OrderResponse response = new OrderResponse();
+            response.setId(order.getId());
+            response.setUserId(order.getUserId());
+            response.setTotalPrice(order.getTotalPrice());
+            response.setStatus(order.getStatus());
+            response.setAddress(order.getAddress());
+            response.setCreatedAt(order.getCreatedAt());
+            response.setOrderItems(orderItems);
+            responses.add(response);
+        }
+        return responses;
     }
     public void updateOrderStatus(Long orderId, Order.OrderStatus status) {
         Order existingOrder = orderRepository.findById(orderId)
