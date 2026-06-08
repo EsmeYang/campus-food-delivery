@@ -39,6 +39,7 @@ public class SecurityConfig {
                 .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/orders/**").authenticated()
                 .requestMatchers(org.springframework.http.HttpMethod.PATCH, "/api/orders/**").authenticated()
                 .requestMatchers(org.springframework.http.HttpMethod.PUT, "/api/orders/**").authenticated()
+                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                 .anyRequest().authenticated()
             );
         return http.build();
