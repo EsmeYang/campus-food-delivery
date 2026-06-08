@@ -1,6 +1,5 @@
 package com.campus.food.dto;
 
-
 import jakarta.validation.constraints.NotBlank;
 
 public class LoginRequest {
