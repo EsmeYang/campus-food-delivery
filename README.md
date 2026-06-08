@@ -74,7 +74,7 @@ Three-layer architecture:
    CREATE DATABASE campus_food;
 ```
 
-3. Update `src/main/resources/application.yml` with your MySQL credentials
+3. Update `src/main/resources/application.yml` with your own MySQL password and JWT secret
 
 4. Start Redis
 ```bash
